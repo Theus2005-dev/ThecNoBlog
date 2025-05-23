@@ -54,4 +54,7 @@ Creating a new Next.js app in C:\Users\User\thecnoblog.
 
 ## npm installs
 > npm install formidable para lidar com upload de arquivos, isso porque receberemos imagem do post do blog.
->
+> npm install @next/font para fonts do google.
+> npm install mysql2 para conexao com banco de dados mysql.
+> npm install bcrypt para lidar com senhas.
+> npm install next-auth para autenticações.

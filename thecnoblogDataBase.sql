@@ -3,7 +3,7 @@ use technoblog;
 create table usuarios(
 nome varchar(50) not null,
 email varchar(250) primary key,
-senha varchar(20) not null
+senha varchar(150) not null
 );
 
 create table posts(
