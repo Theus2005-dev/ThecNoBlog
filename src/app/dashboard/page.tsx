@@ -1,8 +1,7 @@
 import { MdOutlineDashboard } from "react-icons/md";
-import { getServerSession } from "next-auth";
 
 export default function Page(){
-const session = getServerSession();
+
     return(
         <div>
             <header className="flex flex-row justify-between bg-blue-300">

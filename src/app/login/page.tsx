@@ -1,8 +1,7 @@
 'use client'
 import { FormEvent } from "react";
 import { useState } from "react";
-import { signIn } from 'next-auth/react';
-import AuthProvider from '@/sessionProvider/page'; 
+
 import { useRouter } from "next/navigation";
 export default function Login(){
 
@@ -26,7 +25,10 @@ export default function Login(){
         email: form.email,
         senha: form.senha
     }
-    const result = await signIn('credentials', data);
+    const formData = new FormData();
+    formData.append('email', data.email);
+    formData.append('senha', data.senha);
+    const result = await fetch ('/api/cadastroUser/AuthUser',{method: 'POST',body: formData})
     if (result?.ok) {
         route.push('/dashboard');
     }else{
