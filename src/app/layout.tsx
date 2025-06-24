@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Roboto } from "next/font/google";
-
-
+import ProtectedPage from "@/providers/sessionProvider";
 const roboto = Roboto({
   weight: ['400','700'],
   subsets:['latin'],
@@ -34,7 +33,7 @@ export default function RootLayout({
       <body
         className={roboto.className}
       >
-  {children} 
+         <ProtectedPage> {children} </ProtectedPage>
       </body>
     </html>
   );

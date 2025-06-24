@@ -1,8 +1,8 @@
 'use client'
 import { FormEvent } from "react";
 import { useState } from "react";
-
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 export default function Login(){
 
     const route = useRouter();
@@ -21,19 +21,16 @@ export default function Login(){
     }
   async function login(target: FormEvent<HTMLFormElement>) {
     target.preventDefault();
-    const data ={
+    const result = await signIn("credentials",{
         email: form.email,
-        senha: form.senha
+        password: form.senha,
+        redirect: false
+    }) 
+    if(result?.error){
+        setMensagem("Erro: " + result.error)
+        return
     }
-    const formData = new FormData();
-    formData.append('email', data.email);
-    formData.append('senha', data.senha);
-    const result = await fetch ('/api/cadastroUser/AuthUser',{method: 'POST',body: formData})
-    if (result?.ok) {
-        route.push('/dashboard');
-    }else{
-        setMensagem('Dados incorretos. Tente novamente')
-    }
+    route.push("/dashboard")       
     
   }
     return(
