@@ -7,7 +7,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { RowDataPacket } from "mysql2";
 
 
-
+        
 export async function POST(req: NextRequest, res : NextResponse){
     
     // recebendo dados
@@ -15,6 +15,7 @@ export async function POST(req: NextRequest, res : NextResponse){
     const nome = data.get('nome')
     const email = data.get('email')
     const senha = data.get('senha') as string
+
     // validando dados
     if(!email || !nome || !senha){
        return NextResponse.json({message: "Insira dados nos campos abaixo"})
@@ -28,6 +29,7 @@ export async function POST(req: NextRequest, res : NextResponse){
         const conn = await connectDB();
         const sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?,?,?)"
       const executed =  await conn.query(sql,[nome, email, senhaCriptografada]);
+      
       if(executed){
         return NextResponse.json({message: "Dados recebidos e cadastrados"});
       } 

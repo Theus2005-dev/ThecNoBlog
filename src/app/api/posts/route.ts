@@ -1,6 +1,7 @@
 import { connectDB } from "../../../../lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: Request){
   const session = await getServerSession(authOptions)
@@ -21,4 +22,28 @@ export async function GET(request: Request){
   
     
 
+}export async function POST(request: NextRequest, res: NextResponse){
+      const form = await request.formData()
+
+      const titulo = form.get('titulo');
+      const texto = form.get('texto');
+      const email = form.get('email');
+
+      if (!titulo || !texto || !email) {
+        return NextResponse.json({message: "Insira os dados no campo abaixo"})
+      }
+     try {
+       const conn = await connectDB();
+       const sql = "INSERT INTO posts (email_usuario, titulo, texto) VALUES (?,?,?)";
+       const execute = await conn.query(sql,[email, titulo, texto])
+
+       if (execute) {
+        return NextResponse.json({message: 'Post Cadastrados'})
+       }
+       return NextResponse.json({message: 'Não foi possivel postar sua publicação'})
+
+     } catch (error) {
+      console.log("Erro na conexão ao banco de dados para cadastro de usuarios" + error);
+        return NextResponse.json(error)
+     }
 }

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Seguindo from "./seguindo";
 import Recomendado from "./recomendados";
-
+import Link from "next/link";
 
 export default function Page(){
     const session = useSession();
@@ -24,14 +24,18 @@ export default function Page(){
 
     return(
       <div className="flex flex-col">
-                <header className="flex flex-row  bg-blue-500">
+                <header className="flex flex-row justify-between bg-blue-500">
                      
                      <div className="text-start flex flex-row ">
                         <h1 className="text-3xl ml-0">ThecNoBlog</h1> 
                          <IoLogoInstagram className="size-10 text-pink-500"/>
                      </div>
                   
-                    <h1 className="text-2xl mt-1 ">POSTS</h1>
+                    <nav className="flex flex-row list-none gap-5 mr-10">
+                        <li><Link href="/posts">Posts</Link></li>
+                        <li><Link href="/login">Login</Link></li>
+                       
+                    </nav>
                 </header>
                 <section className="flex flex-col items-center">
                     <div className="flex flex-row ">
