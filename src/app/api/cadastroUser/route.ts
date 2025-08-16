@@ -44,4 +44,6 @@ export async function POST(req: NextRequest, res : NextResponse){
    
 
 }
-
+export async function PUT(){
+  
+}

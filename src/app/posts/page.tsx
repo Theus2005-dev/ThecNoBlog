@@ -18,10 +18,11 @@ export default function Post(){
         email: '' 
     });
 
-    useEffect(()=>{
-        if(status === 'loading') return 
-        if(!session) router.push('/login')
-    })
+    useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status]);
     function handleChange(e: React.ChangeEvent){
         const  target = e.target as HTMLTextAreaElement
         const {name, value} =target;

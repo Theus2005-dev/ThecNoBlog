@@ -8,15 +8,17 @@ import Recomendado from "./recomendados";
 import Link from "next/link";
 
 export default function Page(){
-    const session = useSession();
+    const {data: session, status} = useSession();
     const router = useRouter();
       
      const [seguindo, setSeguindo] = useState<boolean>(true); 
    
         useEffect(()=>{
              // autenticação
-             if(!session) router.push('/login');
-            },[session, router])
+                if (status === "unauthenticated") {
+                    return router.push('/login')
+                }
+            },[status])
 
         
    
@@ -32,7 +34,7 @@ export default function Page(){
                      </div>
                   
                     <nav className="flex flex-row list-none gap-5 mr-10">
-                        <li><Link href="/posts">Posts</Link></li>
+                        <li><Link href="/post">Posts</Link></li>
                         <li><Link href="/login">Login</Link></li>
                        
                     </nav>

@@ -30,7 +30,7 @@ export default function Login(){
         setMensagem("Erro: " + result.error)
         return
     }
-    route.push("/dashboard")       
+    route.push("/profile")       
     
   }
     return(

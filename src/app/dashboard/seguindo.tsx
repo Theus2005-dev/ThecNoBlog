@@ -43,6 +43,7 @@ export default function Seguindo(){
                    
                 }
              },[session])  
+             console.log("posts:", post)
              
     return(
         <div>
